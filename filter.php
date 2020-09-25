@@ -752,9 +752,9 @@ class filter_filtercodes extends moodle_text_filter {
                 $coursefiles = $course->get_course_overviewfiles();
                 foreach ($coursefiles as $file) {
                     if ($isimage = $file->is_valid_image()) {
-                        $imgurl = file_encode_url("/pluginfile.php", '/' . $file->get_contextid() . '/' . $file->get_component()
-                                . '/' . $file->get_filearea() . $file->get_filepath() . $file->get_filename() , !$isimage);
-                        $imgurl = new moodle_url($imgurl);
+                        $imgurl = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
+                                $file->get_filearea(), null, $file->get_filepath(),
+                                $file->get_filename())->out(false);
                         break;
                     }
                 }
@@ -900,10 +900,9 @@ class filter_filtercodes extends moodle_text_filter {
                             $imgurl = '';
                             foreach ($coursefiles as $file) {
                                 if ($isimage = $file->is_valid_image()) {
-                                    $imgurl = file_encode_url("/pluginfile.php", '/' . $file->get_contextid() . '/'
-                                            . $file->get_component() . '/' . $file->get_filearea() . $file->get_filepath()
-                                            . $file->get_filename(), !$isimage);
-                                    $imgurl = new moodle_url($imgurl);
+                                    $imgurl = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(),
+                                            $file->get_filearea(), null, $file->get_filepath(),
+                                            $file->get_filename())->out(false);
                                     break;
                                 }
                             }
